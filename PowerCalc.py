@@ -56,7 +56,8 @@ root.rowconfigure(9, weight=1)
 #================================================
 
 """
-This is where we define our functions. The ones that are related to out buttons, text inputs, and more. Since we have to define out functions first and THEN use them. This could be avoid using classes,
+This is where we define our functions. The ones that are related to out buttons, text inputs, and more. 
+We defined them here since we have to define out functions first and THEN use them. This could be avoided using classes,
 but since we are using a procedural approach, we can't do that as easily (if at all).
 """
 def clearnotes():
@@ -89,7 +90,7 @@ Each widget variable name has a descriptive name. so button-sin is for the sin b
 #=====Input fields and buttons
 
 """
-Note that we are defining fields here as well which act as containers
+Note that we are defining frames here as well which act as containers
 """
 
 #-----Main field: where the user enters the operation and takes the previous result
