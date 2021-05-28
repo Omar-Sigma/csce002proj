@@ -64,13 +64,13 @@ def clearinput():
     inputmain.delete(0,tk0.END)
 
 def addsymbol(symbol):
-    current=inputmain.get("1.0")
+    current=inputmain.get()
     inputmain.delete(0,tk0.END)
     inputmain.insert(0,current+ str(symbol))    
 
 def evaluateinput():
     inputmainans.configure(state="normal") #make the answer field read and write
-    ans=eval(inputmain.get("1.0")) # To evaluate The Mathimatical operation
+    ans=eval(inputmain.get()) # To evaluate The Mathimatical operation
     #inputmain.delete(0,tk0.END) # To Delete The Mathimatical operation #This line could be turned on if we want to remove the previous operation made by the user
     inputmainans.insert(0,ans) # To Insert The Answer 
     inputmainans.configure(state="readonly") #make the answer field readonly
@@ -109,7 +109,7 @@ buttonmain = tk0.Button(framemain, text="Ans:", state=DISABLED, bg="#343A3E", fg
 
 inputmainans = tk0.Entry(framemain, bg="#323739", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, readonlybackground="#323739") 
 
-inputmain = tk0.Text(framemain, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width(), height=(framemain.winfo_height())*3/4) 
+inputmain = tk0.Entry(framemain, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width()) 
 
 
 #Here we place our frame on a certain grid position and put our elements inside. We will be doing this several times from now on.
@@ -124,7 +124,8 @@ inputmain.grid(row=1, column=0, rowspan=3,      padx=1, pady=1,columnspan=4, sti
 
 framenotes = tk0.Frame(root, bg="#24292C")
 buttonnotes = tk0.Button(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, text="Clear notes!")
-inputnotes = tk0.Text(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width(), height=(framemain.winfo_height())*3/4)
+#inputnotes = tk0.Text(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width(), height=(framemain.winfo_height())*3/4)
+inputnotes = tk0.Entry(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width())
 
 framenotes.columnconfigure(0, weight=1)
 framenotes.columnconfigure(1, weight=1)
@@ -336,7 +337,5 @@ button_acsch.grid(row=3, column=0, padx=1, pady=1, sticky="nesw")
 button_asech.grid(row=3, column=1, padx=1, pady=1, sticky="nesw")  
 button_acoth.grid(row=3, column=2, padx=1, pady=1, sticky="nesw")  
 
-root.update()
-print(inputmainans.winfo_height())
 if __name__=="__main__":
     root.mainloop()
