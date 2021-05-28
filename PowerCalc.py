@@ -59,7 +59,9 @@ root.rowconfigure(9, weight=1)
 This is where we define our functions. The ones that are related to out buttons, text inputs, and more. Since we have to define out functions first and THEN use them. This could be avoid using classes,
 but since we are using a procedural approach, we can't do that as easily (if at all).
 """
- 
+def clearnotes():
+    inputnotes.delete("1.0", "end-1c")
+
 def clearinput():
     inputmain.delete(0,tk0.END)
 
@@ -72,6 +74,7 @@ def evaluateinput():
     inputmainans.configure(state="normal") #make the answer field read and write
     ans=eval(inputmain.get()) # To evaluate The Mathimatical operation
     #inputmain.delete(0,tk0.END) # To Delete The Mathimatical operation #This line could be turned on if we want to remove the previous operation made by the user
+    inputmainans.delete(0, tk0.END) #This is to delete the previous answer
     inputmainans.insert(0,ans) # To Insert The Answer 
     inputmainans.configure(state="readonly") #make the answer field readonly
 #================================================
@@ -123,9 +126,8 @@ inputmain.grid(row=1, column=0, rowspan=3,      padx=1, pady=1,columnspan=4, sti
 #One button clears the fields. And the other is there for notes (for the user)
 
 framenotes = tk0.Frame(root, bg="#24292C")
-buttonnotes = tk0.Button(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, text="Clear notes!")
-#inputnotes = tk0.Text(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width(), height=(framemain.winfo_height())*3/4)
-inputnotes = tk0.Entry(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width())
+buttonnotes = tk0.Button(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, text="Clear notes!", command=clearnotes)
+inputnotes = tk0.Text(framenotes,bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width(), height=(framemain.winfo_height())*3/4)
 
 framenotes.columnconfigure(0, weight=1)
 framenotes.columnconfigure(1, weight=1)
