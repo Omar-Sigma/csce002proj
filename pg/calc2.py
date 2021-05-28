@@ -1,3 +1,9 @@
+"""
+This file is the work of Abdelrahman Ahmed AbdelKarimRagab
+Several parts of these files were either directly or indirectly used and integrated into the main project file.
+"""
+
+
 from sympy import *
 from tkinter import *
 
