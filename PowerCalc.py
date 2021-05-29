@@ -374,7 +374,7 @@ buttonpo  = framecalcbutton(".", "addsymbol(\".\")").button
 buttonfac = framecalcbutton("!", "addsymbol(\"factorial(\")").button
 buttondec = framecalcbutton("dec", "evaluateinput()").button
 buttonclr = framecalcbutton("clr", "clearinput()").button
-inputdec  = tk0.Entry(framecalcnumbers, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) 
+inputdec  = tk0.Entry(framecalcnumbers, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, width=button2.winfo_width(), insertbackground="#2293D6") 
 
 #Trigonometric and hyperbolic functions
 button_sin   =framefuncbutton1("sin",  "addsymbol(\"sin(\")").button
@@ -412,7 +412,7 @@ button_power    =framefuncbutton1("x^▯",  "addsymbol(\"^\")").button
 button_root     =framefuncbutton1("▯√x",  "addsymbol(\"root(\")").button
 button_log      =framefuncbutton1("log▯(x)",  "addsymbol(\"log(_number_, _base_)\")").button
 
-button_dec  =framefuncbutton2("dec",  "addsymbol(\"**2\")").button
+button_dec  =framefuncbutton2("Deg",  "addsymbol(\"**2\")").button
 button_nPr  =framefuncbutton2("nPr",  "addsymbol(\"root(\")").button
 button_nCr  =framefuncbutton2("nCr",  "addsymbol(\"ln(\")").button
 button_bin  =framefuncbutton2("bin",  "addsymbol(\"**2\")").button
