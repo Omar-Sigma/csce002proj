@@ -219,19 +219,21 @@ inputnotes.grid(row=1, column=0, rowspan=3,     padx=1, pady=1, columnspan=3, st
 framevar = tk0.Frame(root_win, bg="#24292C")
 
 #Defining a class that acts as blueprint for our Entry and Buttons
+
+buttonvarass = tk0.Button(framevar, text="Assign", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) #This is a button for assigning values to variables
+
 class inputvarf:
     """Same as above"""
     def __init__(self):
-        self.entry=tk0.Entry(framevar, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6")
+        self.entry=tk0.Entry(framevar, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=3)
 
 class buttonvarf:
     """This is for our buttons"""
     def __init__(self, text0, command0):
         self.text0=text0
-        self.button=tk0.Button(framevar, borderwidth=0, highlightthickness=0, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", text=text0, command=lambda: eval(command0))
+        self.button=tk0.Button(framevar, borderwidth=0, highlightthickness=0, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", text=text0, command=lambda: eval(command0), width=1)
 
-buttonvarass = tk0.Button(framevar, text="Assign", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
-buttonvarclr = tk0.Button(framevar, text="Clear", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+buttonvarclr = tk0.Button(framevar, text="Clear", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, width=2)
 
 inputvar1 = inputvarf().entry
 inputvar2 = inputvarf().entry
@@ -374,7 +376,7 @@ buttonpo  = framecalcbutton(".", "addsymbol(\".\")").button
 buttonfac = framecalcbutton("!", "addsymbol(\"factorial(\")").button
 buttondec = framecalcbutton("dec", "evaluateinput()").button
 buttonclr = framecalcbutton("clr", "clearinput()").button
-inputdec  = tk0.Entry(framecalcnumbers, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) 
+inputdec  = tk0.Entry(framecalcnumbers, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, width=button2.winfo_width(), insertbackground="#2293D6") 
 
 #Trigonometric and hyperbolic functions
 button_sin   =framefuncbutton1("sin",  "addsymbol(\"sin(\")").button
@@ -409,10 +411,10 @@ button_square   =framefuncbutton1("x²",  "addsymbol(\"²\")").button
 button_sqroot   =framefuncbutton1("√▯",  "addsymbol(\"√(\")").button
 button_natlog   =framefuncbutton1("ln",  "addsymbol(\"ln(\")").button
 button_power    =framefuncbutton1("x^▯",  "addsymbol(\"^\")").button
-button_root     =framefuncbutton1("▯√x",  "addsymbol(\"root(\")").button
+button_root     =framefuncbutton1("▯√x",  "addsymbol(\"root(_number_,_nthroot_)\")").button
 button_log      =framefuncbutton1("log▯(x)",  "addsymbol(\"log(_number_, _base_)\")").button
 
-button_dec  =framefuncbutton2("dec",  "addsymbol(\"**2\")").button
+button_dec  =framefuncbutton2("Deg",  "addsymbol(\"**2\")").button
 button_nPr  =framefuncbutton2("nPr",  "addsymbol(\"root(\")").button
 button_nCr  =framefuncbutton2("nCr",  "addsymbol(\"ln(\")").button
 button_bin  =framefuncbutton2("bin",  "addsymbol(\"**2\")").button
