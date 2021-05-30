@@ -9,13 +9,13 @@ In this project, we are creating an advanced gui calculator that employs many fe
 1.  Basic operations.
 2.  Other operations, such as exponentiation, factorials, permutations and combinations, etc.
 3.  Scientific functions (Exponential, logarithimc, trigonometric, hyperbolic)
-4.  The ability to work with the four main number systems
+4.  The ability to work with the four main number systems and Degrees **(To be added on V0.4)**
 5.  The functionality for user-defined variables.
 6.  Being able to use previous answers and copy them to clipboard.
 7.  Being able to add notes.
 8.  A user-friendly interface.
-9.  A "Help" section. (To be added upon)
-10. A minimal size requirement. (To be implemented)
+9.  A "Help" section. **(To be added on V0.5)**
+10. A minimal size requirement. **(To be freezed on V1.0)**
 
 One important feature that differentiaties this calculator from others is the fact that there are no upper limits
 on the magnitude of the operations. It is totally dependent on the resources of the user.
