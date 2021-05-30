@@ -36,8 +36,8 @@ Future possible additions:-
 
 ## Currently available executables:- (To be added)
     
-1. Windows 10 executable.
-2. Linux executable. (Tested on Debian 10)
+1. Windows 10 executable. (To be added and tested on Windows 10)
+2. Linux executable. (To be added and tested on Debian 10)
 
 ### Regarding mac executables:-
     
