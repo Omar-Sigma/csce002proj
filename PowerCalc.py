@@ -59,8 +59,7 @@ root_or_win.rowconfigure(13, weight=1)
 root_or_win.rowconfigure(14, weight=1)
 root_or_win.rowconfigure(15, weight=1)
 
-
-
+#Our WIndow configuration
 root_win.columnconfigure(0, weight=1)
 root_win.columnconfigure(1, weight=1)
 root_win.columnconfigure(2, weight=1)
@@ -93,10 +92,25 @@ root_win.rowconfigure(15, weight=1)
 #=================================================
 
 """
-This is where we define our functions. The ones that are related to out buttons, text inputs, and more. 
-We defined them here since we have to define out functions first and THEN use them. This could be avoided using classes,
+This is where we define our functions. The ones that are related to our buttons, text inputs, and more. 
+We defined them here since we have to define out functions first and THEN use them. This could be avoided using classes for the widget,
 but since we are using a procedural approach, we can't do that as easily (if at all).
 """
+
+"""
+Another note: It's usually very dangerous to use "eval" on unsanitized user input. However, since this is not a web application or something that could do direct harm to someone, we will use it.
+"""
+
+#These are going to be some user-defined variables and the "previous answer" variable
+aa=0
+bb=0
+cc=0
+dd=0
+ee=0
+ff=0
+
+ans=0
+
 def clearnotes():
     """This function clears the notes field"""
     inputnotes.delete("1.0", "end-1c")
@@ -124,20 +138,58 @@ def correctinput(user_input):
 
 def evaluateinput():
     """This function evaluates input"""
-    inputmainans.configure(state="normal") #make the answer field read and write
+    global ans                                   #This is done to make it possible for function to change the "ans" variable globally
+    inputmainans.configure(state="normal")       #make the answer field read and write
     user_input_mod=correctinput(inputmain.get()) #User input is stored in this variable
-    ans=eval(user_input_mod) # To evaluate The Mathimatical operation
-    #inputmain.delete(0,tk0.END) # To Delete The Mathimatical operation #This line could be turned on if we want to remove the previous operation made by the user
-    inputmainans.delete(0, tk0.END) #This is to delete the previous answer
-    inputmainans.insert(0,ans) # To Insert The Answer 
-    inputmainans.configure(state="readonly") #make the answer field readonly
+    try:                                         #This is to print an "Error" string in case something happened
+        ans=eval(user_input_mod)                 #To evaluate The Mathimatical operation
+    except:
+        ans="Error"
+    #inputmain.delete(0,tk0.END)                 #To Delete The Mathimatical operation #This line could be turned on if we want to remove the previous operation made by the user
+    inputmainans.delete(0, tk0.END)              #This is to delete the previous answer
+    inputmainans.insert(0,ans)                   #To Insert The Answer 
+    inputmainans.configure(state="readonly")     #Make the answer field readonly
 
+
+def checkvar(varname, inputfieldid):
+    """
+    This function checks the variable's validty. So that the variable is assigned a value of 0 if it doesn't make sense.
+    This function takes the variable we want to check as an argument and the inputfield associated with it.
+    """
+    try:
+        varname=eval(inputfieldid.get())
+    except:
+        inputfieldid.delete(0,tk0.END)
+        inputfieldid.insert(0, "0")
+        varname=0
+    return varname
+
+def assignvars():
+    """This function assigns the values entered by the user to the variables"""
+    global aa, bb, cc, dd, ee, ff
+    aa=checkvar(aa,inputvar1) #Here we check the validty of the user-input and assign the value to it
+    bb=checkvar(aa,inputvar2)
+    cc=checkvar(aa,inputvar3)
+    dd=checkvar(aa,inputvar4)
+    ee=checkvar(aa,inputvar5)
+    ff=checkvar(aa,inputvar6)
+    
+def clearvars():
+    """This function resets the variables' values and clears their input fields"""
+    global aa, bb, cc, dd, ee, ff
+    aa=0; bb=0; cc=0; dd=0; ee=0; ff=0;
+    inputvar1.delete(0, tk0.END)
+    inputvar2.delete(0, tk0.END)
+    inputvar3.delete(0, tk0.END)
+    inputvar4.delete(0, tk0.END)
+    inputvar5.delete(0, tk0.END)
+    inputvar6.delete(0, tk0.END)
 #=================================================
 #=================================================
 #=================================================
 
 """
-This is where we define out buttons. text inputs, and more.
+This is where we define our buttons. text inputs, and more.
 Each widget variable name has a descriptive name. so button-sin is for the sin button.
 """
 
@@ -220,7 +272,7 @@ framevar = tk0.Frame(root_win, bg="#24292C")
 
 #Defining a class that acts as blueprint for our Entry and Buttons
 
-buttonvarass = tk0.Button(framevar, text="Assign", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0) #This is a button for assigning values to variables
+buttonvarass = tk0.Button(framevar, text="Assign", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command=assignvars) #This is a button for assigning values to variables
 
 class inputvarf:
     """Same as above"""
@@ -233,7 +285,7 @@ class buttonvarf:
         self.text0=text0
         self.button=tk0.Button(framevar, borderwidth=0, highlightthickness=0, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", text=text0, command=lambda: eval(command0), width=1)
 
-buttonvarclr = tk0.Button(framevar, text="Clear", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, width=2)
+buttonvarclr = tk0.Button(framevar, text="Clear", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, width=2, command=clearvars)
 
 inputvar1 = inputvarf().entry
 inputvar2 = inputvarf().entry
