@@ -1,4 +1,6 @@
-# This is our CSCE002 Project. Nile University.
+# CSCE002 Project: Advanced GUI Scientific Calculator
+
+We are two students at the Nile University.
 
 In this project, we are creating an advanced gui calculator that employs many features of modern scientific calculators.
 
