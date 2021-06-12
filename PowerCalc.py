@@ -57,7 +57,6 @@ root_or_win.rowconfigure(11, weight=1)
 root_or_win.rowconfigure(12, weight=1)
 root_or_win.rowconfigure(13, weight=1)
 root_or_win.rowconfigure(14, weight=1)
-root_or_win.rowconfigure(15, weight=1)
 
 #Our WIndow configuration
 root_win.columnconfigure(0, weight=1)
@@ -85,7 +84,6 @@ root_win.rowconfigure(11, weight=1)
 root_win.rowconfigure(12, weight=1)
 root_win.rowconfigure(13, weight=1)
 root_win.rowconfigure(14, weight=1)
-root_win.rowconfigure(15, weight=1)
 
 #=================================================
 #=================================================
@@ -130,6 +128,21 @@ def correctinput(user_input):
     This input changes some parts of the user's input to make it possible for the interpreter to evaluate them correctly
     """
     user_input_mod=user_input.replace("^","**").replace("√","sqrt").replace("²", "**2") #This is line replaces some human friendly symbols with actual symbols used for computation
+    if 1==0:
+        user_input_mod=user_input.replace("sin(","sin((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("cos(","cos((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("tan(","tan((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("sec(","sec((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("csc(","csc((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("cot(","cot((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("asin(","asin((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("acos(","acos((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("atan(","atan((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("asec(","asec((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("acsc(","acsc((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+        user_input_mod=user_input.replace("acot(","acot((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+    else:
+        pass
     if user_input=="":
         user_input_mod="0"
     else:
@@ -149,6 +162,21 @@ def evaluateinput():
     inputmainans.delete(0, tk0.END)              #This is to delete the previous answer
     inputmainans.insert(0,ans)                   #To Insert The Answer 
     inputmainans.configure(state="readonly")     #Make the answer field readonly
+
+def decevaluateinput():
+    """This function evaluates input"""
+    global ans                                   #This is done to make it possible for function to change the "ans" variable globally
+    inputmainans.configure(state="normal")       #make the answer field read and write
+    user_input_mod=correctinput(inputmain.get()) #User input is stored in this variable
+    try:                                         #This is to print an "Error" string in case something happened
+        ans=N(eval(user_input_mod), inputdec.get())                  #To evaluate The Mathimatical operation
+    except:
+        ans="Error"
+    #inputmain.delete(0,tk0.END)                 #To Delete The Mathimatical operation #This line could be turned on if we want to remove the previous operation made by the user
+    inputmainans.delete(0, tk0.END)              #This is to delete the previous answer
+    inputmainans.insert(0,ans)                   #To Insert The Answer 
+    inputmainans.configure(state="readonly")     #Make the answer field readonly
+
 
 
 def checkvar(varname, inputfieldid):
@@ -426,7 +454,7 @@ buttondiv = framecalcbutton("/", "addsymbol(\"/\")").button
 buttoneq  = framecalcbutton("=", "evaluateinput()").button
 buttonpo  = framecalcbutton(".", "addsymbol(\".\")").button
 buttonfac = framecalcbutton("!", "addsymbol(\"factorial(\")").button
-buttondec = framecalcbutton("dec", "evaluateinput()").button
+buttondec = framecalcbutton("dec", "decevaluateinput()").button
 buttonclr = framecalcbutton("clr", "clearinput()").button
 inputdec  = tk0.Entry(framecalcnumbers, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, width=button2.winfo_width(), insertbackground="#2293D6") 
 
@@ -466,7 +494,7 @@ button_power    =framefuncbutton1("x^▯",  "addsymbol(\"^\")").button
 button_root     =framefuncbutton1("▯√x",  "addsymbol(\"root(_number_,_nthroot_)\")").button
 button_log      =framefuncbutton1("log▯(x)",  "addsymbol(\"log(_number_, _base_)\")").button
 
-button_dec  =framefuncbutton2("Deg",  "addsymbol(\"**2\")").button
+button_deg  =framefuncbutton2("Deg",  "addsymbol(\"**2\")").button
 button_nPr  =framefuncbutton2("nPr",  "addsymbol(\"root(\")").button
 button_nCr  =framefuncbutton2("nCr",  "addsymbol(\"ln(\")").button
 button_bin  =framefuncbutton2("bin",  "addsymbol(\"**2\")").button
@@ -545,7 +573,7 @@ button_acsch.grid(row=3, column=0, padx=1, pady=1, sticky="nesw")
 button_asech.grid(row=3, column=1, padx=1, pady=1, sticky="nesw")  
 button_acoth.grid(row=3, column=2, padx=1, pady=1, sticky="nesw")  
 
-button_dec  .grid(row=4, column=0, padx=1, pady=1, sticky="nesw")    
+button_deg  .grid(row=4, column=0, padx=1, pady=1, sticky="nesw")    
 button_nPr  .grid(row=4, column=1, padx=1, pady=1, sticky="nesw")    
 button_nCr  .grid(row=4, column=2, padx=1, pady=1, sticky="nesw")    
 button_bin  .grid(row=5, column=0, padx=1, pady=1, sticky="nesw")    
@@ -569,7 +597,7 @@ buttonabout = tk0.Button(frameaccess, text="About", bg="#343A3E", fg="#2293D6", 
 buttonexit = tk0.Button(frameaccess, text="Exit", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = root_or_win.destroy)
 
 #Placing them
-frameaccess.grid(row=13, column=0, padx=2, pady=2, columnspan=10, rowspan=3, sticky="nesw")
+frameaccess.grid(row=12, column=0, padx=2, pady=2, columnspan=10, rowspan=3, sticky="nesw")
 
 frameaccess.rowconfigure(0, weight=1)
 frameaccess.rowconfigure(1, weight=1)

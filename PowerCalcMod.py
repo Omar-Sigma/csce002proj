@@ -336,7 +336,5 @@ button_acsch.grid(row=3, column=0, padx=1, pady=1, sticky="nesw")
 button_asech.grid(row=3, column=1, padx=1, pady=1, sticky="nesw")  
 button_acoth.grid(row=3, column=2, padx=1, pady=1, sticky="nesw")  
 
-root.update()
-print(inputmainans.winfo_height())
 if __name__=="__main__":
     root.mainloop()
