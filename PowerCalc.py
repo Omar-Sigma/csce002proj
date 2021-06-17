@@ -281,11 +281,11 @@ def assignvars():
     """This function assigns the values entered by the user to the variables"""
     global aa, bb, cc, dd, ee, ff
     aa=checkvar(aa,inputvar1) #Here we check the validty of the user-input and assign the value to it
-    bb=checkvar(aa,inputvar2)
-    cc=checkvar(aa,inputvar3)
-    dd=checkvar(aa,inputvar4)
-    ee=checkvar(aa,inputvar5)
-    ff=checkvar(aa,inputvar6)
+    bb=checkvar(bb,inputvar2)
+    cc=checkvar(cc,inputvar3)
+    dd=checkvar(dd,inputvar4)
+    ee=checkvar(ee,inputvar5)
+    ff=checkvar(ff,inputvar6)
     
 def clearvars():
     """This function resets the variables' values and clears their input fields"""
