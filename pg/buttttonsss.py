@@ -1,4 +1,3 @@
-
 from sympy import *
 from tkinter import *
 
@@ -446,6 +445,6 @@ buttonsqrt.grid(row='3',column='3', sticky="nesw")
 
 
 
-
-root.mainloop()
+if __name__ == "__main__": #Used because we won't be using the application directly. We will use it as an import instead.
+    root.mainloop()
 

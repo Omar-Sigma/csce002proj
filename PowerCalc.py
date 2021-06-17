@@ -3,6 +3,8 @@ import tkinter.ttk as ttk0
 from ttkthemes import ThemedStyle #This is in order to implement a certain theme. The colors, however, are manually created.
 from tkinter.constants import DISABLED #This is imported automatically, since we are using the "state=DISABLED" option in some buttons
 from sympy import * #This is where the bulk of the scientific functions come from
+#import PowerCalcIm1 as PCIm1 #This is a file that one of the team members created. This will be used as import since it's a big file and putting it directly here would be a lot of work.
+import helpsectiontext as hstext #This file contains a lot of text, so we put it in a seperate variable instead.
 
 #=================================================
 #=================================================
@@ -13,14 +15,25 @@ This is the root widget initialization. We imported tkinter as tk0 instead of im
 """
 
 root_or_win = tk0.Tk()
-root_or_win.title("Test")
+root_or_win.title("PowerCalc V1.0")
 s=ThemedStyle(root_or_win)
 s.theme_use('breeze')
 root_or_win.configure(bg="#24292C")
-
+root_or_win.geometry("1280x720")
 #Instead of directly using the original window as a root window, I create a frame inside it that we will use as the root instead, so that we can control it, add padding, and more without affacting the main window.
 root_win=tk0.Frame(root_or_win, bg="#24292C")
-root_win.grid(column=0, row=0, columnspan=10, rowspan=16, padx=4, pady=4, sticky="nesw")
+root_win.grid(column=0, row=0, columnspan=10, rowspan=15, padx=4, pady=4, sticky="nesw")
+
+#Creating frames for the help and exit sections
+helpsection=tk0.Frame(root_or_win, bg="#24292C")
+aboutsection=tk0.Frame(root_or_win, bg="#24292C")
+
+#Icon
+try:
+    root_or_win.iconphoto(True, tk0.PhotoImage(file='pcalcico.png'))
+except:
+    pass
+
 #=================================================
 #=================================================
 #=================================================
@@ -85,6 +98,59 @@ root_win.rowconfigure(12, weight=1)
 root_win.rowconfigure(13, weight=1)
 root_win.rowconfigure(14, weight=1)
 
+#Help configuration
+helpsection.columnconfigure(0, weight=1)
+helpsection.columnconfigure(1, weight=1)
+helpsection.columnconfigure(2, weight=1)
+helpsection.columnconfigure(3, weight=1)
+helpsection.columnconfigure(4, weight=1)
+helpsection.columnconfigure(5, weight=1)
+helpsection.columnconfigure(6, weight=1)
+helpsection.columnconfigure(7, weight=1)
+helpsection.columnconfigure(8, weight=1)
+helpsection.columnconfigure(9, weight=1)
+helpsection.rowconfigure(0, weight=1)
+helpsection.rowconfigure(1, weight=1)
+helpsection.rowconfigure(2, weight=1)
+helpsection.rowconfigure(3, weight=1)
+helpsection.rowconfigure(4, weight=1)
+helpsection.rowconfigure(5, weight=1)
+helpsection.rowconfigure(6, weight=1)
+helpsection.rowconfigure(7, weight=1)
+helpsection.rowconfigure(8, weight=1)
+helpsection.rowconfigure(9, weight=1)
+helpsection.rowconfigure(10, weight=1)
+helpsection.rowconfigure(11, weight=1)
+helpsection.rowconfigure(12, weight=1)
+helpsection.rowconfigure(13, weight=1)
+helpsection.rowconfigure(14, weight=1)
+
+#About configuration
+aboutsection.columnconfigure(0, weight=1)
+aboutsection.columnconfigure(1, weight=1)
+aboutsection.columnconfigure(2, weight=1)
+aboutsection.columnconfigure(3, weight=1)
+aboutsection.columnconfigure(4, weight=1)
+aboutsection.columnconfigure(5, weight=1)
+aboutsection.columnconfigure(6, weight=1)
+aboutsection.columnconfigure(7, weight=1)
+aboutsection.columnconfigure(8, weight=1)
+aboutsection.columnconfigure(9, weight=1)
+aboutsection.rowconfigure(0, weight=1)
+aboutsection.rowconfigure(1, weight=1)
+aboutsection.rowconfigure(2, weight=1)
+aboutsection.rowconfigure(3, weight=1)
+aboutsection.rowconfigure(4, weight=1)
+aboutsection.rowconfigure(5, weight=1)
+aboutsection.rowconfigure(6, weight=1)
+aboutsection.rowconfigure(7, weight=1)
+aboutsection.rowconfigure(8, weight=1)
+aboutsection.rowconfigure(9, weight=1)
+aboutsection.rowconfigure(10, weight=1)
+aboutsection.rowconfigure(11, weight=1)
+aboutsection.rowconfigure(12, weight=1)
+aboutsection.rowconfigure(13, weight=1)
+aboutsection.rowconfigure(14, weight=1)
 #=================================================
 #=================================================
 #=================================================
@@ -111,7 +177,7 @@ ans=0
 
 def clearnotes():
     """This function clears the notes field"""
-    inputnotes.delete("1.0", "end-1c")
+    inputnotes.delete("1.0", "end-1c") #The "Text" widget takes different parameters than simple entry, that's why the arguments are diiferent.
 
 def clearinput():
     """This function clears the input field"""
@@ -212,6 +278,29 @@ def clearvars():
     inputvar4.delete(0, tk0.END)
     inputvar5.delete(0, tk0.END)
     inputvar6.delete(0, tk0.END)
+
+
+#The next three functions are for navigation between different frames as if they are screens
+def gotohelp():
+    root_win.grid_forget()
+    helpsection.grid(column=0, row=0, columnspan=10, rowspan=15, padx=4, pady=4, sticky="nesw")
+
+def gotoabout():
+    root_win.grid_forget()
+    aboutsection.grid(column=0, row=0, columnspan=10, rowspan=15, padx=4, pady=4, sticky="nesw")
+
+def gotomain():
+    try:
+        aboutsection.grid_forget()
+    except:
+        pass
+    try:
+        helpsection.grid_forget()
+    except:
+        pass
+    root_win.grid(column=0, row=0, columnspan=10, rowspan=16, padx=4, pady=4, sticky="nesw")
+
+
 #=================================================
 #=================================================
 #=================================================
@@ -244,7 +333,7 @@ framemain.rowconfigure(3, weight=1)
 
 buttonmain = tk0.Button(framemain, text="Ans:", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command=lambda: addsymbol("ans")) 
 
-inputmainans = tk0.Entry(framemain, bg="#323739", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, readonlybackground="#323739") 
+inputmainans = tk0.Entry(framemain, bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, readonlybackground="#323739") 
 
 inputmain = tk0.Entry(framemain, bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=framemain.winfo_width()) 
 
@@ -539,18 +628,18 @@ buttonclr.grid(row=3, column=2,padx=1, pady=1, sticky="nesw")
 inputdec.grid(row=4, column=2, padx=1, pady=1, sticky="nesw")
 
 #Placing buttons of class framecalcfuncs1 
-button_sin.grid(row=0, column=0, padx=1, pady=1, sticky="nesw")  
-button_cos.grid(row=0, column=1, padx=1, pady=1, sticky="nesw")  
-button_tan.grid(row=0, column=2, padx=1, pady=1, sticky="nesw")  
-button_csc.grid(row=0, column=0, padx=1, pady=1, sticky="nesw")  
-button_sec.grid(row=0, column=1, padx=1, pady=1, sticky="nesw")  
-button_cot.grid(row=0, column=2, padx=1, pady=1, sticky="nesw")  
-button_sinh .grid(row=1, column=0, padx=1, pady=1, sticky="nesw")  
-button_cosh .grid(row=1, column=1, padx=1, pady=1, sticky="nesw")  
-button_tanh .grid(row=1, column=2, padx=1, pady=1, sticky="nesw")  
-button_csch .grid(row=1, column=0, padx=1, pady=1, sticky="nesw")  
-button_sech .grid(row=1, column=1, padx=1, pady=1, sticky="nesw")  
-button_coth .grid(row=1, column=2, padx=1, pady=1, sticky="nesw")  
+button_sin.   grid(row=0, column=0, padx=1, pady=1, sticky="nesw")  
+button_cos.   grid(row=0, column=1, padx=1, pady=1, sticky="nesw")  
+button_tan.   grid(row=0, column=2, padx=1, pady=1, sticky="nesw")  
+button_csc.   grid(row=0, column=0, padx=1, pady=1, sticky="nesw")  
+button_sec.   grid(row=0, column=1, padx=1, pady=1, sticky="nesw")  
+button_cot.   grid(row=0, column=2, padx=1, pady=1, sticky="nesw")  
+button_sinh  .grid(row=1, column=0, padx=1, pady=1, sticky="nesw")  
+button_cosh  .grid(row=1, column=1, padx=1, pady=1, sticky="nesw")  
+button_tanh  .grid(row=1, column=2, padx=1, pady=1, sticky="nesw")  
+button_csch  .grid(row=1, column=0, padx=1, pady=1, sticky="nesw")  
+button_sech  .grid(row=1, column=1, padx=1, pady=1, sticky="nesw")  
+button_coth  .grid(row=1, column=2, padx=1, pady=1, sticky="nesw")  
 
 button_square.grid(row=4, column=0, padx=1, pady=1, sticky="nesw")    
 button_sqroot.grid(row=4, column=1, padx=1, pady=1, sticky="nesw")    
@@ -592,9 +681,55 @@ button_oct  .grid(row=5, column=2, padx=1, pady=1, sticky="nesw")
 #-----Exit frame
 #Help, About, and Exit buttons and their frames
 frameaccess=tk0.Frame(root_win ,bg="#24292C")
-buttonhelp = tk0.Button(frameaccess, text="Help", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
-buttonabout = tk0.Button(frameaccess, text="About", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+buttonhelp = tk0.Button(frameaccess, text="Help", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0  , command = gotohelp)
+buttonabout = tk0.Button(frameaccess, text="About", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotoabout)
 buttonexit = tk0.Button(frameaccess, text="Exit", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = root_or_win.destroy)
+buttonmainh = tk0.Button(helpsection, text="Main", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
+buttonmaina = tk0.Button(aboutsection, text="Main", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command = gotomain)
+
+#Help
+labelh1SB= tk0.Scrollbar(helpsection, orient='vertical', troughcolor="#343A3E", bg="#464c4b", elementborderwidth=0, bd=0) #Scrollbar
+
+labelh1 = tk0.Text(helpsection, bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, yscrollcommand=labelh1SB.set) #The text widget with the scrollbaar
+labelh1SB.config(command=labelh1.yview)
+labelh1.tag_configure("center", justify='center') #In these four lines, we are adding a tag to the text widget to change it's appearence. This tag allows us to center text.
+labelh1.insert("end-1c", hstext.text) #We are inserting out text into the box here
+labelh1.tag_add("center", "1.0", "end")
+labelh1.config(state=DISABLED)  #Here, we are making our textbox disabled. It should be readonly.
+
+#About
+textofabout1="""CSCE002 Project: Advanced GUI Scientific Calculator
+===================================================
+PowerCalc V1.0
+==============
+
+This application is designed to be an advanced gui calculator that 
+employs features of scientific calculators with even more perks.
+
+License
+=======
+This calculator is liensed under the LGPL-2.1 License.
+
+Developers
+==========
+1-Abdelrahman A. AbelkarimRagab
+2-Omar M. A. Elsayed
+
+For more info, go to github. Click on the button to copy the link."""
+
+textofabout2=tk0.StringVar(value="https://github.com/Omar-Sigma/csce002proj")
+
+labela1 = tk0.Label(aboutsection, text=textofabout1 , bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0)
+
+buttongithub = tk0.Button(aboutsection, text="Github: ", bg="#343A3E", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, command=lambda : root_or_win.clipboard_append("https://github.com/Omar-Sigma/Phys002-Projects")) #This command copies the link to the clipboard
+
+labela2 = tk0.Entry(aboutsection, textvariable=textofabout2, bg="#323938", fg="#2293D6", font="Courier 12 bold", borderwidth=0, highlightthickness=0, insertbackground="#2293D6", width=30, state="readonly", readonlybackground="#323938") 
+
+
+
+
+
+
 
 #Placing them
 frameaccess.grid(row=12, column=0, padx=2, pady=2, columnspan=10, rowspan=3, sticky="nesw")
@@ -617,6 +752,34 @@ buttonhelp .grid(row=0, column=0, padx=2, pady=2, columnspan=10, sticky="nesw")
 buttonabout.grid(row=1, column=0, padx=2, pady=2,columnspan=10, sticky="nesw")    
 buttonexit .grid(row=2, column=0, padx=2, pady=2, columnspan=10, sticky="nesw")    
 
+
+
+
+
+
+#Placing Help and About stuff
+#Help
+buttonmainh   .grid(row=14, column=0, padx=2, pady=2, columnspan=10, sticky="nesw")    
+labelh1       .grid(row=0, column=0, rowspan=14, columnspan=9, sticky="nesw")    
+labelh1SB     .grid(row=0, column=9, padx=2, pady=2, rowspan=14, sticky="nesw")    
+
+
+
+
+
+#About
+buttonmaina .grid(row=14, column=0, padx=2, pady=2, columnspan=10, sticky="nesw")    
+
+labela1     .grid(row=0, column=0, padx=2, pady=2, rowspan=13, columnspan=10, sticky="nesw")    
+buttongithub .grid(row=13, column=0, padx=2, pady=2, columnspan=2,sticky="nesw")    
+labela2     .grid(row=13, column=2, padx=2, pady=2, columnspan=8,sticky="nesw")    
+
+
+
+
+
+
+
 #=================================================
 #=================================================
 #=================================================
@@ -631,3 +794,6 @@ This line helps us execute the main windows (the line inside the if block) if th
 #Starting the application
 if __name__ == "__main__":
     root_or_win.mainloop()
+
+if __name__!= "__main__": #This is to destroy the window if it is run as an import due to some reason
+    root_or_win.destroy()
