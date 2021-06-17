@@ -62,9 +62,12 @@ Wrote the first working functions that have been added upon.
 Helped with formatting the gui and providing good suggestions.
 
 #### Some of the functions he added:-
-I.   The first versions of the evaluate function.
-II.  A function for clearing previous answers.
+I. The first versions of the evaluate function.
+II. A function for clearing previous answers. 
 III. A function that inserts the corresponding symbol to the input field.
+IV. 4 functions that designs the 4 toggle buttons (bin, hex, dec, oct)
+V. A function that closes all other toggle buttons when the user clicks on any toggle button.
+VI. A toggle button switching function. Creating a seperate .py file for this file.
 
 
 ### Omar Mohamed Abdelmonem Elsayed
@@ -78,9 +81,13 @@ Added modifications on Abdelrahman's work. Added several functions. Main designe
 Added classes for better code organization and smoother development.
 
 #### Some of the functions he added:-
-I.   The input clear functions.
-II.  The variable and variable checking and clearing functions.
-III. A function that modifies user-friendly input to executable input.
+I. The input clear functions.
+II. The variable and variable checking and clearing functions.
+III. A function that modifies user-friendly input to executable input and writes the number in hex, binary and oct forms, and provides support for degrees, radians, and permutations/combinations capabilities.
+IV. A function that shows the result in decimal format.
+V. functions to navigate the user to and from the help and about sections in addition to scrollbars.
+VI. Adding various imports to the code. Creating the help text file. Editing some of abdelrahman’s functions.
+How to use the software
 
 # Regards.
 
