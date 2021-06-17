@@ -33,16 +33,26 @@ Future possible additions:-
 2. ttkthemes.
 3. Sympy.
 4. Pyinstaller for freezing the application. (spec files are included with icons)
+5. Venv (Virtual environments). To run pyinstaller in it.
 
-## Currently available executables:- (To be added)
+## Currently available executables:-
     
-1. Windows 10 executable. (To be added and tested on Windows 10)
-2. Linux executable. (To be added and tested on Debian 10)
+1. Windows 10 executable. (Tested on Windows 7)
+2. Linux executable. (Tested on Debian 10)
 
+        Note: for linux executables, set permissions first by typing:-
+            chmod +x binaryname
+        e.g.:-
+            chmod +x PowerCalc
+            
+        then, to run:-
+            ./binary name
+        e.g.:-
+            ./PowerCalc
+            
 ### Regarding mac executables:-
     
 For a Mac executable, you can help out development by installing pyinstaller and freezeing the application on a mac.
-
 
 ## The two developers of the project are:-
 
