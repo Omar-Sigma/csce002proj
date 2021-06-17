@@ -1,5 +1,4 @@
-
-from sympy import *
+#Original file made by abdelrahman. Some modifications were done by Omar.
 from tkinter import *
 
 #window
@@ -107,40 +106,46 @@ def close_switches(c):
 def switch_deg():
     global is_deg_on
     if is_deg_on == False:
-        button_deg.config(bg='#2293D6' ,fg='#343A3E')
+        button_deg.config(bg='#3daee9' ,fg='#FFFFFF')
         is_deg_on=True
         
     else:
         button_deg.config(bg='#343A3E' ,fg='#2293D6')
         is_deg_on=False
+    print(is_deg_on)
 
         
 def switch_bin():
     close_switches(2)
     global is_bin_on
     if is_bin_on == False:
-        button_bin.config(bg='#2293D6' ,fg='#343A3E')
+        button_bin.config(bg='#3daee9' ,fg='#FFFFFF')
         is_bin_on=True
+        
     else:
         button_bin.config(bg='#343A3E' ,fg='#2293D6')
         is_bin_on=False
-        
+
+
 def switch_hex():
     close_switches(3)
     global is_hex_on
     if is_hex_on == False:
-        button_hex.config(bg='#2293D6' ,fg='#343A3E')
+        button_hex.config(bg='#3daee9' ,fg='#FFFFFF')
         is_hex_on=True
+        
     else:
         button_hex.config(bg='#343A3E' ,fg='#2293D6')
         is_hex_on=False
-        
+
+
 def switch_oct():
     close_switches(4)
     global is_oct_on
     if is_oct_on == False:
-        button_oct.config(bg='#2293D6' ,fg='#343A3E')
+        button_oct.config(bg='#3daee9' ,fg='#FFFFFF')
         is_oct_on=True
+        
     else:
         button_oct.config(bg='#343A3E' ,fg='#2293D6')
         is_oct_on=False
@@ -231,8 +236,9 @@ buttonrb.grid(row='1',column='4', sticky="nesw")
 buttonpower.grid(row='3',column='4', sticky="nesw")
 buttonsqrt.grid(row='3',column='3', sticky="nesw")
 
+#Starting the application
+if __name__ == "__main__":
+    root.mainloop()
 
-
-
-root.mainloop()
-
+if __name__!= "__main__": #This is to destroy the window if it is run as an import due to some reason
+    root.destroy()

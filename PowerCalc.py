@@ -3,8 +3,10 @@ import tkinter.ttk as ttk0
 from ttkthemes import ThemedStyle #This is in order to implement a certain theme. The colors, however, are manually created.
 from tkinter.constants import DISABLED #This is imported automatically, since we are using the "state=DISABLED" option in some buttons
 from sympy import * #This is where the bulk of the scientific functions come from
-#import PowerCalcIm1 as PCIm1 #This is a file that one of the team members created. This will be used as import since it's a big file and putting it directly here would be a lot of work.
+import togglebuttons as pctg0 #This is a file that one of the team members created. This will be used as import since it's a big file and putting it directly here would be a lot of work.
+
 import helpsectiontext as hstext #This file contains a lot of text, so we put it in a seperate variable instead.
+from sympy.functions.combinatorial.numbers import nC, nP #Importing permutations and combinations functions
 
 #=================================================
 #=================================================
@@ -178,7 +180,6 @@ ans=0
 def clearnotes():
     """This function clears the notes field"""
     inputnotes.delete("1.0", "end-1c") #The "Text" widget takes different parameters than simple entry, that's why the arguments are diiferent.
-
 def clearinput():
     """This function clears the input field"""
     inputmain.delete(0,tk0.END)
@@ -194,21 +195,33 @@ def correctinput(user_input):
     This input changes some parts of the user's input to make it possible for the interpreter to evaluate them correctly
     """
     user_input_mod=user_input.replace("^","**").replace("√","sqrt").replace("²", "**2") #This is line replaces some human friendly symbols with actual symbols used for computation
-    if 1==0:
-        user_input_mod=user_input.replace("sin(","sin((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("cos(","cos((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("tan(","tan((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("sec(","sec((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("csc(","csc((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("cot(","cot((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("asin(","asin((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("acos(","acos((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("atan(","atan((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("asec(","asec((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("acsc(","acsc((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
-        user_input_mod=user_input.replace("acot(","acot((pi/180)*") #This is line replaces some human friendly symbols with actual symbols used for computation
+
+#We revert the hyperbolic functions back to a format the interpreter understands. We didn't do it directly to avoid problems with accidently replacing "sin" with something for example if degrees are turned on.
+    if pctg0.is_deg_on == True: #These lines are for the degree functionality. Here, radians are converted to degrees by multiplying them by pi/180
+        user_input_mod=user_input_mod.replace("sin(","sin((pi/180)*")   
+        user_input_mod=user_input_mod.replace("cos(","cos((pi/180)*")   
+        user_input_mod=user_input_mod.replace("tan(","tan((pi/180)*")   
+        user_input_mod=user_input_mod.replace("sec(","sec((pi/180)*")   
+        user_input_mod=user_input_mod.replace("csc(","csc((pi/180)*")   
+        user_input_mod=user_input_mod.replace("cot(","cot((pi/180)*")   
+        user_input_mod=user_input_mod.replace("asiin(","(180/pi)*asin(") #For the inverse ones, we want asin(1) to get us 90 instead of pi/2. so we will multiplt by 180/pi BEFORE the function instead. Also, we changed the asin, acos, etc to asiin, acios, etc to avoid problems when replacing atan with something, since the atan inside the "atan" will be replaced as well. 
+        user_input_mod=user_input_mod.replace("acios(","(180/pi)*acos(") 
+        user_input_mod=user_input_mod.replace("atian(","(180/pi)*atan(") 
+        user_input_mod=user_input_mod.replace("asiec(","(180/pi)*asec(") 
+        user_input_mod=user_input_mod.replace("acisc(","(180/pi)*acsc(") 
+        user_input_mod=user_input_mod.replace("aciot(","(180/pi)*acot(") 
     else:
         pass
+
+    if pctg0.is_bin_on == True: #These lines check if the togglebuttons are enabled, and if they are, they change the result into the respective number system. 
+        user_input_mod = "bin("+user_input_mod+")"
+    elif pctg0.is_hex_on == True:
+        user_input_mod = "hex("+user_input_mod+")"
+    elif pctg0.is_oct_on == True:
+        user_input_mod = "oct("+user_input_mod+")"
+    else:
+        pass
+
     if user_input=="":
         user_input_mod="0"
     else:
@@ -562,12 +575,12 @@ button_sech  =framefuncbutton2("sech", "addsymbol(\"sech(\")").button
 button_coth  =framefuncbutton2("coth", "addsymbol(\"coth(\")").button
 
 #Inverse trigonometric and hyperbolic functions 
-button_asin  =framefuncbutton1("sin-1",  "addsymbol(\"asin(\")").button
-button_acos  =framefuncbutton1("cos-1",  "addsymbol(\"acos(\")").button
-button_atan  =framefuncbutton1("tan-1",  "addsymbol(\"atan(\")").button
-button_acsc  =framefuncbutton2("csc-1",  "addsymbol(\"acsc(\")").button
-button_asec  =framefuncbutton2("sec-1",  "addsymbol(\"asec(\")").button
-button_acot  =framefuncbutton2("cot-1",  "addsymbol(\"acot(\")").button
+button_asin  =framefuncbutton1("sin-1",  "addsymbol(\"asiin(\")").button
+button_acos  =framefuncbutton1("cos-1",  "addsymbol(\"acios(\")").button
+button_atan  =framefuncbutton1("tan-1",  "addsymbol(\"atian(\")").button
+button_acsc  =framefuncbutton2("csc-1",  "addsymbol(\"acisc(\")").button
+button_asec  =framefuncbutton2("sec-1",  "addsymbol(\"asiec(\")").button
+button_acot  =framefuncbutton2("cot-1",  "addsymbol(\"aciot(\")").button
 button_asinh =framefuncbutton1("sinh-1", "addsymbol(\"asinh(\")" ).button
 button_acosh =framefuncbutton1("cosh-1", "addsymbol(\"acosh(\")" ).button
 button_atanh =framefuncbutton1("tanh-1", "addsymbol(\"atanh(\")" ).button
@@ -580,15 +593,16 @@ button_square   =framefuncbutton1("x²",  "addsymbol(\"²\")").button
 button_sqroot   =framefuncbutton1("√▯",  "addsymbol(\"√(\")").button
 button_natlog   =framefuncbutton1("ln",  "addsymbol(\"ln(\")").button
 button_power    =framefuncbutton1("x^▯",  "addsymbol(\"^\")").button
+
 button_root     =framefuncbutton1("▯√x",  "addsymbol(\"root(_number_,_nthroot_)\")").button
 button_log      =framefuncbutton1("log▯(x)",  "addsymbol(\"log(_number_, _base_)\")").button
 
-button_deg  =framefuncbutton2("Deg",  "addsymbol(\"**2\")").button
-button_nPr  =framefuncbutton2("nPr",  "addsymbol(\"root(\")").button
-button_nCr  =framefuncbutton2("nCr",  "addsymbol(\"ln(\")").button
-button_bin  =framefuncbutton2("bin",  "addsymbol(\"**2\")").button
-button_hex  =framefuncbutton2("hex",  "addsymbol(\"root(\")").button
-button_oct  =framefuncbutton2("oct",  "addsymbol(\"log(_number_, _base_)\")").button
+button_deg  =framefuncbutton2("Deg",  "pctg0.switch_deg(button_deg)").button
+button_nPr  =framefuncbutton2("nPr",  "addsymbol(\"nP(_number1_,_number2_)\")").button
+button_nCr  =framefuncbutton2("nCr",  "addsymbol(\"nC(_number1_,_number2_)\")").button
+button_bin  =framefuncbutton2("bin",  "pctg0.switch_bin(button_bin, button_hex, button_oct)").button
+button_hex  =framefuncbutton2("hex",  "pctg0.switch_hex(button_bin, button_hex, button_oct)").button
+button_oct  =framefuncbutton2("oct",  "pctg0.switch_oct(button_bin, button_hex, button_oct)").button
 
 #This is where we place them
 framecalcnumbers.grid(row=7 ,column=0, rowspan=5, columnspan=4,padx=2, pady=2, sticky="nesw") #The main buttons frame
@@ -729,8 +743,6 @@ labela2 = tk0.Entry(aboutsection, textvariable=textofabout2, bg="#323938", fg="#
 
 
 
-
-
 #Placing them
 frameaccess.grid(row=12, column=0, padx=2, pady=2, columnspan=10, rowspan=3, sticky="nesw")
 
@@ -756,7 +768,6 @@ buttonexit .grid(row=2, column=0, padx=2, pady=2, columnspan=10, sticky="nesw")
 
 
 
-
 #Placing Help and About stuff
 #Help
 buttonmainh   .grid(row=14, column=0, padx=2, pady=2, columnspan=10, sticky="nesw")    
@@ -773,12 +784,6 @@ buttonmaina .grid(row=14, column=0, padx=2, pady=2, columnspan=10, sticky="nesw"
 labela1     .grid(row=0, column=0, padx=2, pady=2, rowspan=13, columnspan=10, sticky="nesw")    
 buttongithub .grid(row=13, column=0, padx=2, pady=2, columnspan=2,sticky="nesw")    
 labela2     .grid(row=13, column=2, padx=2, pady=2, columnspan=8,sticky="nesw")    
-
-
-
-
-
-
 
 #=================================================
 #=================================================

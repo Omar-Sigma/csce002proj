@@ -83,4 +83,7 @@ just type your desired operation and then click on one of the toggle
 buttons (hex, binary, oct) to have the result converted to them.
 
 15-To use degrees, click on the degree toggle button.
+
+16-Use the permutation and combination functions in the same manner
+as the nth root. You type the two parameters inside the brackets respectively.
 """
